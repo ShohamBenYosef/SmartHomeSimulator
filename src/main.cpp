@@ -11,6 +11,7 @@ void printMenu() {
     std::cout << "1. Show all devices\n";
     std::cout << "2. Turn on device\n";
     std::cout << "3. Turn off device\n";
+    std::cout << "4. Remove device\n";
     std::cout << "0. Exit\n";
     std::cout << "Choose option: ";
 }
