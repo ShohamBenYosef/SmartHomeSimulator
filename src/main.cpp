@@ -9,6 +9,8 @@
 void printMenu() {
     std::cout << "\n--- Smart Home Simulator ---\n";
     std::cout << "1. Show all devices\n";
+    std::cout << "2. Turn on device\n";
+    std::cout << "3. Turn off device\n";
     std::cout << "0. Exit\n";
     std::cout << "Choose option: ";
 }
@@ -28,6 +30,26 @@ int main() {
 
         if (choice == 1) {
             home.displayAllDevices();
+        } else if (choice == 2) {
+            int id;
+            std::cout << "Enter device id: ";
+            std::cin >> id;
+
+            if (home.turnOnDevice(id)) {
+                std::cout << "Device turned on.\n";
+            } else {
+                std::cout << "Device not found.\n";
+            }
+        } else if (choice == 3) {
+            int id;
+            std::cout << "Enter device id: ";
+            std::cin >> id;
+
+            if (home.turnOffDevice(id)) {
+                std::cout << "Device turned off.\n";
+            } else {
+                std::cout << "Device not found.\n";
+            }
         } else if (choice == 0) {
             std::cout << "Exiting...\n";
         } else {
