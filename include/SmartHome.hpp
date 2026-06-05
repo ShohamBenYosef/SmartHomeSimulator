@@ -13,6 +13,9 @@ class SmartHome {
     public:
         void addDevice(std::unique_ptr<Device> device);
         void displayAllDevices() const;
+        Device* getDeviceById(int id);
+        bool turnOnDevice(int id);
+        bool turnOffDevice(int id);
 };
 
 

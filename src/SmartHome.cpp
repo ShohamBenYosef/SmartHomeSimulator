@@ -15,3 +15,30 @@ void SmartHome::displayAllDevices() const {
         device->displayStatus();
     }
 }
+
+Device* SmartHome::getDeviceById(int id) {
+    for (const auto& dev : devices) {
+        if (dev->getId() == id) {
+            return dev.get();
+        }
+    }
+    return nullptr; // Return nullptr if device not found
+}
+
+bool SmartHome::turnOnDevice(int id) {
+    Device* dev = getDeviceById(id);
+    if (dev) {
+        dev->turnOn();
+        return true;
+    }
+    return false; // Device not found
+}
+
+bool SmartHome::turnOffDevice(int id) {
+    Device* dev = getDeviceById(id);
+    if (dev) {
+        dev->turnOff();
+        return true;
+    }
+    return false; // Device not found
+}
