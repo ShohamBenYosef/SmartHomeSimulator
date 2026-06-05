@@ -7,30 +7,43 @@
 #include <string>
 #include <vector>
 
+void printMenu() {
+
+    std::cout << "\nSmart Home simulator\n";
+    std::cout << "--------------------\n";
+    std::cout << "1. show all devices\n";
+    std::cout << "0. exit\n";
+    std::cout << "Enter your choice: ";
+}
+
 int main() {
-    SmartHome myHome;
+    SmartHome home;
+    home.addDevice(std::make_unique<Light>(1, "Living Room Light", "Living Room", 75));
+    home.addDevice(std::make_unique<AirConditioner>(2, "Bedroom AC", "Bedroom", 22));
+    home.addDevice(std::make_unique<MotionSensor>(3, "Hallway Sensor", "Hallway", true));
 
-    myHome.addDevice(std::make_unique<Light>(1,"Living Room Light", "Living Room", 120));
-    myHome.addDevice(std::make_unique<Light>(2,"Bedroom Light", "Bedroom", 50));
-    myHome.addDevice(std::make_unique<AirConditioner>(3,"Living Room AC", "Living Room", 22));
-    myHome.addDevice(std::make_unique<MotionSensor>(4,"Living Room Motion Sensor", "Living Room"));
-    myHome.displayAllDevices();
+    int choice = -1;
 
-    std::cout << "\nTurning on device with ID 1\n";
-    myHome.turnOnDevice(1);
-    std::cout << "\nTurning off device with ID 2\n";
-    myHome.turnOffDevice(2);
-    std::cout << "\nTurning on device with ID 4\n";
-    myHome.turnOnDevice(4);
+    while (choice != 0) {
+        printMenu();
+        std::cin >> choice;
 
-    std::cout << "\nAfter changes:\n";
-    myHome.displayAllDevices();
-    
-    std::cout << "\nRemoving device 2...\n";
-    myHome.removeDevice(2);
+        switch (choice) {
+            case 1:
+                home.displayAllDevices();
+                break;
+            case 0:
+                std::cout << "Exiting..\n";
+                break;
+            default:
+                std::cout << "Invalid choice. Please try again.\n";
+                break;
+        }
+    }
 
-    myHome.displayAllDevices();
-    
-    
+
+
+
+
     return 0;
 }
