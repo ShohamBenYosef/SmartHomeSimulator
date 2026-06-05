@@ -10,4 +10,6 @@ include_directories(include)
 add_executable(SmartHomeSimulator
     src/main.cpp
     src/Device.cpp
+    src/Light.cpp
+    src/SmartHome.cpp
 )
