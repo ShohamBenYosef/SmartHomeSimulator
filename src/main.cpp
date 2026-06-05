@@ -27,9 +27,9 @@ int main() {
     myHome.displayAllDevices();
     
     std::cout << "\nRemoving device 2...\n";
-    home.removeDevice(2);
+    myHome.removeDevice(2);
 
-    home.displayAllDevices();
+    myHome.displayAllDevices();
     
     
     return 0;
