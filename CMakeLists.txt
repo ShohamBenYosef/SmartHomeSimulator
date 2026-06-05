@@ -13,4 +13,5 @@ add_executable(SmartHomeSimulator
     src/Light.cpp
     src/SmartHome.cpp
     src/AirConditioner.cpp
+    src/MotionSensor.cpp
 )
