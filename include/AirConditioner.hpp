@@ -10,7 +10,7 @@ class AirConditioner : public Device {
 
     public:
         AirConditioner(int id, const std::string& name, const std::string& location, int temperature);
-        
+        ~AirConditioner() override;
         int getTemperature() const;
         void setTemperature(int temp);
 

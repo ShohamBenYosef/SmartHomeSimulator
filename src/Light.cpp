@@ -8,6 +8,10 @@ Light::Light(int id, const std::string& name, const std::string& location, int b
     setBrightness(brightness);
 }
 
+Light::~Light() {
+    std::cout << "Destroying Light: " << getName() << std::endl;
+}
+
 int Light::getBrightness() const {
     return brightness;
 }

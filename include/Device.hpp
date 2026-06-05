@@ -12,13 +12,13 @@ class Device {
     
     public:
         Device(int id, const std::string& name, const std::string& location);
-        virtual ~Device() = default;
+        virtual ~Device();
         
         int getId() const;
         const std::string& getName() const;
         const std::string& getLocation() const;
         bool getIsOn() const;
-
+    
         void turnOn();
         void turnOff();
         

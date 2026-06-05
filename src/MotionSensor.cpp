@@ -6,6 +6,10 @@ MotionSensor::MotionSensor(int id, const std::string& name, const std::string& l
     : Device(id, name, location), motionDetected(false) {
 }
 
+MotionSensor::~MotionSensor() {
+    std::cout << "Destroying Motion Sensor: " << getName() << std::endl; 
+}
+
 bool MotionSensor::isMotionDetected() const {
     return motionDetected;
 }

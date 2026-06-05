@@ -7,6 +7,11 @@ Device::Device(int id, const std::string& name, const std::string& location)
     : id(id), name(name), isOn(false), location(location) {
     }
 
+Device::~Device() {
+    std::cout << "Destroying Device: " << getName() << std::endl; 
+}
+
+
 int Device::getId() const {
     return id;
 }

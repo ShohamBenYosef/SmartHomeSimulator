@@ -17,6 +17,7 @@ class SmartHome {
         bool turnOnDevice(int id);
         bool turnOffDevice(int id);
         bool removeDevice(int id);
+        int getDeviceCount() const;
 };
 
 

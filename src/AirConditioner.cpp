@@ -8,6 +8,9 @@ AirConditioner::AirConditioner(int id, const std::string& name, const std::strin
         setTemperature(temperature); // Use setter to validate temperature
     }
 
+AirConditioner::~AirConditioner() {
+    std::cout << "Destroying Air Conditioner: " << getName() << std::endl; 
+}
 
 int AirConditioner::getTemperature() const {
     return temperature;

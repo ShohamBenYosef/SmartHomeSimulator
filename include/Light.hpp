@@ -10,7 +10,8 @@ class Light : public Device {
 
     public:
         Light(int id, const std::string& name, const std::string& location, int brightness);
-        
+        ~Light() override;
+
         int getBrightness() const;
         void setBrightness(int level);
 

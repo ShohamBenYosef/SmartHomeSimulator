@@ -52,3 +52,7 @@ bool SmartHome::removeDevice(int id) {
     }
     return false; // Device not found
 }
+
+int SmartHome::getDeviceCount() const {
+    return devices.size();
+}

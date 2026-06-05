@@ -11,7 +11,7 @@ class MotionSensor : public Device {
 
     public:
         MotionSensor(int id, const std::string& name, const std::string& location);
-        
+        ~MotionSensor() override;
         bool isMotionDetected() const;
         void setMotionDetected(bool detected);
 
