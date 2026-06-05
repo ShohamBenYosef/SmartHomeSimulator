@@ -1,5 +1,7 @@
 #include "Light.hpp"
 #include "SmartHome.hpp"
+#include "AirConditioner.hpp"
+
 
 #include <iostream>
 #include <string>
@@ -10,7 +12,7 @@ int main() {
 
     myHome.addDevice(std::make_unique<Light>(1,"Living Room Light", "Living Room", 120));
     myHome.addDevice(std::make_unique<Light>(2,"Bedroom Light", "Bedroom", 50));
-    
+    myHome.addDevice(std::make_unique<AirConditioner>(3,"Living Room AC", "Living Room", 22));
     myHome.displayAllDevices();
 
     std::cout << "\nTurning on device with ID 1\n";
