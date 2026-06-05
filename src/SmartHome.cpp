@@ -42,3 +42,13 @@ bool SmartHome::turnOffDevice(int id) {
     }
     return false; // Device not found
 }
+
+bool SmartHome::removeDevice(int id) {
+    for (auto dev = devices.begin(); dev != devices.end(); ++dev) {
+        if ((*dev)->getId() == id) {
+            devices.erase(dev);
+            return true; // Device removed
+        }
+    }
+    return false; // Device not found
+}

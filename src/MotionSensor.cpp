@@ -14,7 +14,6 @@ void MotionSensor::setMotionDetected(bool detected) {
     motionDetected = detected;
 }
 
-
 void MotionSensor::displayStatus() const {
     std::cout << "Motion Sensor Id: " << getId()
               << " | Name: " << getName()

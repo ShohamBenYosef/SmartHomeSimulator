@@ -16,6 +16,7 @@ class SmartHome {
         Device* getDeviceById(int id);
         bool turnOnDevice(int id);
         bool turnOffDevice(int id);
+        bool removeDevice(int id);
 };
 
 

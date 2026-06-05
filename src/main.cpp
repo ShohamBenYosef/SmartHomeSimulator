@@ -26,6 +26,10 @@ int main() {
     std::cout << "\nAfter changes:\n";
     myHome.displayAllDevices();
     
+    std::cout << "\nRemoving device 2...\n";
+    home.removeDevice(2);
+
+    home.displayAllDevices();
     
     
     return 0;
