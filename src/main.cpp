@@ -1,10 +1,7 @@
 #include "SmartHome.hpp"
-#include "Light.hpp"
-#include "AirConditioner.hpp"
-#include "MotionSensor.hpp"
+#include "DeviceFactory.hpp"
 
 #include <iostream>
-#include <memory>
 #include <string>
 
 void printMenu() {
@@ -30,18 +27,55 @@ int readInt(const std::string& prompt) {
         }
 
         std::cout << "Invalid input. Please enter a number.\n";
-
         std::cin.clear();
         std::cin.ignore(10000, '\n');
     }
 }
 
+std::string readLine(const std::string& prompt) {
+    std::string value;
+
+    std::cout << prompt;
+    std::getline(std::cin >> std::ws, value);
+
+    return value;
+}
+
+void addLight(SmartHome& home, int& nextId) {
+    std::string name = readLine("Enter light name: ");
+    std::string location = readLine("Enter location: ");
+    int brightness = readInt("Enter brightness: ");
+
+    home.addDevice(DeviceFactory::createLight(nextId, name, location, brightness));
+    std::cout << "Light added with id " << nextId << ".\n";
+    nextId++;
+}
+
+void addAirConditioner(SmartHome& home, int& nextId) {
+    std::string name = readLine("Enter AC name: ");
+    std::string location = readLine("Enter location: ");
+    int temperature = readInt("Enter temperature: ");
+
+    home.addDevice(DeviceFactory::createAirConditioner(nextId, name, location, temperature));
+    std::cout << "Air conditioner added with id " << nextId << ".\n";
+    nextId++;
+}
+
+void addMotionSensor(SmartHome& home, int& nextId) {
+    std::string name = readLine("Enter sensor name: ");
+    std::string location = readLine("Enter location: ");
+
+    home.addDevice(DeviceFactory::createMotionSensor(nextId, name, location));
+    std::cout << "Motion sensor added with id " << nextId << ".\n";
+    nextId++;
+}
+
 int main() {
     SmartHome home;
 
-    home.addDevice(std::make_unique<Light>(1, "Kitchen Light", "Kitchen", 80));
-    home.addDevice(std::make_unique<AirConditioner>(2, "Living Room AC", "Living Room", 24));
-    home.addDevice(std::make_unique<MotionSensor>(3, "Entrance Sensor", "Entrance"));
+    home.addDevice(DeviceFactory::createLight(1, "Kitchen Light", "Kitchen", 80));
+    home.addDevice(DeviceFactory::createAirConditioner(2, "Living Room AC", "Living Room", 24));
+    home.addDevice(DeviceFactory::createMotionSensor(3, "Entrance Sensor", "Entrance"));
 
     int nextId = 4;
     int choice = -1;
@@ -54,89 +88,25 @@ int main() {
             home.displayAllDevices();
         }
         else if (choice == 2) {
-            int id;
-            id = readInt("Enter device id: ");
-
-            if (home.turnOnDevice(id)) {
-                std::cout << "Device turned on.\n";
-            } else {
-                std::cout << "Device not found.\n";
-            }
+            int id = readInt("Enter device id: ");
+            std::cout << (home.turnOnDevice(id) ? "Device turned on.\n" : "Device not found.\n");
         }
         else if (choice == 3) {
-            int id;
-            id = readInt("Enter device id: ");
-
-            if (home.turnOffDevice(id)) {
-                std::cout << "Device turned off.\n";
-            } else {
-                std::cout << "Device not found.\n";
-            }
+            int id = readInt("Enter device id: ");
+            std::cout << (home.turnOffDevice(id) ? "Device turned off.\n" : "Device not found.\n");
         }
         else if (choice == 4) {
-            int id;
-            id = readInt("Enter device id: ");
-
-            if (home.removeDevice(id)) {
-                std::cout << "Device removed.\n";
-            } else {
-                std::cout << "Device not found.\n";
-            }
+            int id = readInt("Enter device id: ");
+            std::cout << (home.removeDevice(id) ? "Device removed.\n" : "Device not found.\n");
         }
         else if (choice == 5) {
-            std::string name;
-            std::string location;
-            int brightness;
-
-            std::cin.ignore();
-
-            std::cout << "Enter light name: ";
-            std::getline(std::cin, name);
-
-            std::cout << "Enter location: ";
-            std::getline(std::cin, location);
-
-            std::cout << "Enter brightness: ";
-            brightness = readInt("Enter brightness: ");
-
-            home.addDevice(std::make_unique<Light>(nextId, name, location, brightness));
-            std::cout << "Light added with id " << nextId << ".\n";
-            nextId++;
+            addLight(home, nextId);
         }
         else if (choice == 6) {
-            std::string name;
-            std::string location;
-            int temperature;
-
-            std::cin.ignore();
-
-            std::cout << "Enter AC name: ";
-            std::getline(std::cin, name);
-
-            std::cout << "Enter location: ";
-            std::getline(std::cin, location);
-
-            temperature = readInt("Enter temperature: ");
-
-            home.addDevice(std::make_unique<AirConditioner>(nextId, name, location, temperature));
-            std::cout << "Air conditioner added with id " << nextId << ".\n";
-            nextId++;
+            addAirConditioner(home, nextId);
         }
         else if (choice == 7) {
-            std::string name;
-            std::string location;
-
-            std::cin.ignore();
-
-            std::cout << "Enter sensor name: ";
-            std::getline(std::cin, name);
-
-            std::cout << "Enter location: ";
-            std::getline(std::cin, location);
-
-            home.addDevice(std::make_unique<MotionSensor>(nextId, name, location));
-            std::cout << "Motion sensor added with id " << nextId << ".\n";
-            nextId++;
+            addMotionSensor(home, nextId);
         }
         else if (choice == 0) {
             std::cout << "Exiting...\n";
