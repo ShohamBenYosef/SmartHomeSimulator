@@ -13,6 +13,7 @@ void printMenu() {
     std::cout << "5. Add light\n";
     std::cout << "6. Add air conditioner\n";
     std::cout << "7. Add motion sensor\n";
+    std::cout << "8. Save devices to file\n";
     std::cout << "0. Exit\n";
 }
 
@@ -107,6 +108,13 @@ int main() {
         }
         else if (choice == 7) {
             addMotionSensor(home, nextId);
+        }
+        else if (choice == 8) {
+            if (home.saveToFile("devices.txt")) {
+                std::cout << "Devices saved.\n";
+            } else {
+                std::cout << "Failed to save devices.\n";
+            }
         }
         else if (choice == 0) {
             std::cout << "Exiting...\n";

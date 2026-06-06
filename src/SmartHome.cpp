@@ -1,5 +1,9 @@
 #include "SmartHome.hpp"
+#include "Light.hpp"
+#include "AirConditioner.hpp"
+#include "MotionSensor.hpp"
 
+#include <fstream>
 #include <iostream>
 #include <vector>
 #include <memory>
@@ -55,4 +59,30 @@ bool SmartHome::removeDevice(int id) {
 
 int SmartHome::getDeviceCount() const {
     return devices.size();
+}
+
+
+bool SmartHome::saveToFile(const std::string& filename) const {
+    std::ofstream file(filename);
+
+    if (!file) {
+        throw std::runtime_error("Can't open file");
+    }
+
+    for (const auto& device : devices) {
+        if (const Light* light = dynamic_cast<const Light*>(device.get())) {
+            file << "LIGHT," << light->getId() << "," << light->getName() << ","
+                << light->getIsOn() << "," << light->getLocation() << "," << light->getBrightness() << "\n";
+        }
+        else if (const AirConditioner* ac = dynamic_cast<const AirConditioner*>(device.get())) {
+            file << "AC," << ac->getId() << "," << ac->getName() << ","
+                << ac->getIsOn() << "," << ac->getLocation() << "," << ac->getTemperature() << "\n";
+        }
+        else if (const MotionSensor* ms = dynamic_cast<const MotionSensor*>(device.get())) {
+            file << "MS," << ms->getId() << "," << ms->getName() << "," << ms->getIsOn() << "," 
+                << ms->getLocation() << "," << ms->isMotionDetected() << "\n";
+        }
+    }
+
+    return true;
 }

@@ -5,6 +5,7 @@
 
 #include <vector>
 #include <memory>
+#include <string>
 
 class SmartHome {
     private:
@@ -18,6 +19,7 @@ class SmartHome {
         bool turnOffDevice(int id);
         bool removeDevice(int id);
         int getDeviceCount() const;
+        bool saveToFile(const std::string& filename) const;
 };
 
 
